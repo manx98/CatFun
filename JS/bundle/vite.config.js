@@ -3,12 +3,12 @@ import path from 'path';
 
 export default defineConfig({
   build: {
-    outDir: 'dist',
+    outDir: '../../packages/xi/assets/js',
     lib: {
       entry: path.resolve(__dirname, 'src/main.js'),
       name: 'kitty',
       fileName: (format) => `kitty.${format}.js`,
-      formats: ['es', 'umd', 'cjs']
+      formats: ['umd']
     },
     rollupOptions: {
       external: [],
