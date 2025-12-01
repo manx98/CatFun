@@ -110,6 +110,7 @@ class JS2 {
       }
       return "";
     });
+    _runtime.evaluate("var utils_1={req};");
   }
 
   Future<void> _installCheerio() async {
