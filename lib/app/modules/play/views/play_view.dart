@@ -148,11 +148,7 @@ class _PlayViewState extends State<PlayView> with AfterLayoutMixin {
           logLevel: logLevel,
         ),
       );
-      controller = VideoController(player!, onSpeedUpChanged: (flag) {
-        if (flag) {
-          boop.call(HapticsType.medium);
-        }
-      });
+      controller = VideoController(player!);
       if (player!.platform is NativePlayer) {
         var pp = player!.platform as NativePlayer;
         var temp = await _tempPath();
@@ -332,7 +328,7 @@ class _PlayViewState extends State<PlayView> with AfterLayoutMixin {
     Widget videoView = Video(
       fit: mediaKitFit,
       fill: Colors.black,
-      placeholder: showVideoCover ? _buildCoverImage() : null,
+      // placeholder: showVideoCover ? _buildCoverImage() : null,
       controller: controller,
       onEnterFullscreen: () async {
         await defaultEnterNativeFullscreen();

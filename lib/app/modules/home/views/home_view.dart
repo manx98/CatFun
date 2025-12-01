@@ -70,19 +70,19 @@ class HomeView extends GetView<HomeController> {
               contentPadding: EdgeInsets.all(16),
             ),
           ),
-          instructionConfig: CommandPaletteInstructionConfig(
-            showInstructions: false,
-          ),
+          // instructionConfig: CommandPaletteInstructionConfig(
+          //   showInstructions: false,
+          // ),
         ),
-        onTabSwitch: controller.switchTabview,
-        onClose: () {
-          if (homeview.currentBarIndex == 0) {
-            Future.delayed(const Duration(milliseconds: 100), () {
-              controller.focusNode.requestFocus();
-              controller.homeFocusNode.requestFocus();
-            });
-          }
-        },
+        // onTabSwitch: controller.switchTabview,
+        // onClose: () {
+        //   if (homeview.currentBarIndex == 0) {
+        //     Future.delayed(const Duration(milliseconds: 100), () {
+        //       controller.focusNode.requestFocus();
+        //       controller.homeFocusNode.requestFocus();
+        //     });
+        //   }
+        // },
         actions: [
           CommandPaletteAction.nested(
             label: "切换镜像",

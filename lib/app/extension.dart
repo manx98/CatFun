@@ -63,7 +63,7 @@ extension ISettingMixin on Object {
     } else if (key == SettingsAllKey.showPlayTips) {
       return curr.showPlayTips;
     } else if (key == SettingsAllKey.webviewPlayType) {
-      return curr.webviewPlayType;
+      // return curr.webviewPlayType;
     } else if (key == SettingsAllKey.onBoardingShowed) {
       return curr.onBoardingShowed;
     } else if (key == SettingsAllKey.videoKernel) {
@@ -89,7 +89,7 @@ extension ISettingMixin on Object {
     } else if (key == SettingsAllKey.showPlayTips) {
       curr.showPlayTips = value;
     } else if (key == SettingsAllKey.webviewPlayType) {
-      curr.webviewPlayType = value;
+      // curr.webviewPlayType = value;
     } else if (key == SettingsAllKey.onBoardingShowed) {
       curr.onBoardingShowed = value;
     } else if (key == SettingsAllKey.videoKernel) {

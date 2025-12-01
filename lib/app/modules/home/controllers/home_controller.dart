@@ -447,8 +447,7 @@ class HomeController extends GetxController
       var dispose = showLoading("加载分类中");
 
       // NOTE(d1y): 不存在分类并且请求次数没有超过阈值
-      var needFetch = !currentHasCategoryer &&
-          !cacheCategory.fetchCountAlreadyMax(currentMirrorItemId);
+      var needFetch = !currentHasCategoryer;
 
       if (needFetch) {
         try {
@@ -534,17 +533,18 @@ class HomeController extends GetxController
     updateWindowLastSize();
   }
 
-  void switchTabview(TabSwitchDirection direction) {
-    if (currentBarIndex == 0 && direction == TabSwitchDirection.left) return;
-    if (currentBarIndex == 2 && direction == TabSwitchDirection.right) return;
-    if (direction == TabSwitchDirection.left) {
-      currentBarIndex--;
-    } else {
-      currentBarIndex++;
-    }
-    currentBarController.jumpToPage(currentBarIndex);
-    update();
-  }
+  // TODO 待实现
+  // void switchTabview(TabSwitchDirection direction) {
+  //   if (currentBarIndex == 0 && direction == TabSwitchDirection.left) return;
+  //   if (currentBarIndex == 2 && direction == TabSwitchDirection.right) return;
+  //   if (direction == TabSwitchDirection.left) {
+  //     currentBarIndex--;
+  //   } else {
+  //     currentBarIndex++;
+  //   }
+  //   currentBarController.jumpToPage(currentBarIndex);
+  //   update();
+  // }
 
   void changeCurrentBarIndex(int i) {
     if (currentBarIndex == i) return;
