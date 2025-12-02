@@ -98,10 +98,6 @@ final Color kActiveColor = Color(0xFF6750A4);
 
 var scaffoldKey = GlobalKey<ScaffoldState>();
 
-// TODO(d1y): support dynamic set wallpaper
-// https://www.zichen.zone/archives/acg-api.html
-final String kWallpaper = "https://www.dmoe.cc/random.php";
-
 enum LiveSourceType {
   github,
   full,
@@ -1220,11 +1216,6 @@ class TVUIState extends State<TVUI>
         height: double.infinity,
         decoration: BoxDecoration(
           color: Colors.transparent,
-          image: DecorationImage(
-            image: NetworkImage(kWallpaper),
-            fit: BoxFit.cover,
-            opacity: .42,
-          ),
         ),
       ),
     );
@@ -1261,9 +1252,6 @@ class TVUIState extends State<TVUI>
               autofocus: true,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 240),
-                padding: EdgeInsets.only(
-                  bottom: homeController.showBottomNavigationBar ? kDefaultAppBottomBarHeight : 0,
-                ),
                 child: Stack(
                   children: [
                     if (isDesktop) bgWidget,

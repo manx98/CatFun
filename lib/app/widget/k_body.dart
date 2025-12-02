@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 /// ? _BottomAppBarDefaultsM3(context) // 这里默认是80(_BottomAppBarDefaultsM3)
 /// : _BottomAppBarDefaultsM2(context);
 /// ```
-double kDefaultAppBottomBarHeight = 80;
+double kDefaultAppBottomBarHeight = 65;
 
 class KBody extends StatelessWidget {
   final Widget child;
@@ -26,8 +26,7 @@ class KBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: child),
-          SizedBox(height: kDefaultAppBottomBarHeight),
+          Expanded(child: child)
         ],
       ),
     );

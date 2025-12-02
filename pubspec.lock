@@ -885,6 +885,14 @@ packages:
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
     source: hosted
     version: "6.0.0"
+  liquid_glass_bottom_bar:
+    dependency: "direct main"
+    description:
+      name: liquid_glass_bottom_bar
+      sha256: "31b19d83d6d10435bc75fafd1e7b5c90589334be1aa714b6139f0cbb6d9521df"
+      url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
+    source: hosted
+    version: "0.0.6"
   logging:
     dependency: transitive
     description:
@@ -1277,14 +1285,6 @@ packages:
       url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
     source: hosted
     version: "2.0.1"
-  salomon_bottom_bar:
-    dependency: "direct main"
-    description:
-      name: salomon_bottom_bar
-      sha256: e20abf2e449749432223a8b4e6647c212eef6c2b638e0ed8cc92eff9529c2b48
-      url: "https://mirrors.tuna.tsinghua.edu.cn/dart-pub/"
-    source: hosted
-    version: "3.3.2"
   screen_brightness_android:
     dependency: transitive
     description:

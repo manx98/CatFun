@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:aurora/aurora.dart';
 import 'package:catmovie/app/modules/home/views/tv.dart';
 import 'package:catmovie/app/widget/k_body.dart';
-import 'package:catmovie/app/widget/zoom.dart';
 import 'package:command_palette/command_palette.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,8 @@ import 'package:catmovie/app/extension.dart';
 import 'package:catmovie/app/modules/home/views/index_home_view.dart';
 import 'package:catmovie/app/modules/home/views/settings_view.dart';
 import 'package:catmovie/shared/enum.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:liquid_glass_bottom_bar/liquid_glass_bottom_bar.dart';
+
 import 'package:xi/xi.dart';
 
 import '../controllers/home_controller.dart';
@@ -175,55 +175,27 @@ class HomeView extends GetView<HomeController> {
                   },
                 ),
               ),
-            ],
-          ),
-          bottomNavigationBar: homeview.showBottomNavigationBar
-              ? BottomAppBar(
-                  elevation: 0,
-                  color: homeview.currentBarIndex == 2
-                      ? Colors.transparent
-                      : color,
-                  padding: EdgeInsets.zero,
-                  child: GestureDetector(
-                    behavior: HitTestBehavior.opaque,
-                    child: SizedBox(
+              Positioned.fill(
+                bottom: 5,
+                child: homeview.showBottomNavigationBar
+              ? Container(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                width: 300,
+                child: LiquidGlassBottomBar(
                       height: kDefaultAppBottomBarHeight,
-                      child: ClipRect(
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
-                          child: Center(
-                            child: ConstrainedBox(
-                              constraints: const BoxConstraints(
-                                maxWidth: 360,
-                              ),
-                              child: SalomonBottomBar(
-                                itemPadding: const EdgeInsets.symmetric(
-                                  vertical: 9,
-                                  horizontal: 18,
-                                ),
-                                currentIndex: homeview.currentBarIndex,
-                                onTap: (int i) {
-                                  homeview.changeCurrentBarIndex(i);
-                                },
-                                items: _tabs
-                                    .map(
-                                      (e) => SalomonBottomBarItem(
-                                        icon: Zoom(child: Icon(e['icon'])),
-                                        title: Text(e['title']),
-                                        selectedColor: e['color'],
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      items: _tabs.map((e)=>LiquidGlassBottomBarItem(icon: e['icon'], label: e['title'])).toList(),
+                      currentIndex: homeview.currentBarIndex,
+                      onTap: (i) => homeview.changeCurrentBarIndex(i),
+                      activeColor: const Color(0xFF34C3FF),
+                      barBlurSigma: 16,
+                      activeBlurSigma: 24,
                     ),
-                  ),
-                )
-              : null,
-          extendBody: homeview.showBottomNavigationBar,
+              ),
+            )
+                  : SizedBox())
+            ],
+          )
         ),
       ),
     );

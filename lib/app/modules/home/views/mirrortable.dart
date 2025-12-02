@@ -549,7 +549,7 @@ class MirrorCard extends StatelessWidget {
 
               var list = [
                 _type == SourceType.maccms ? "VOD" : "JS",
-                if (gfw is bool) gfw ? "直连" : "翻墙",
+                if (gfw is bool) gfw ? "翻墙" : "直连",
               ];
               return Row(
                 spacing: 6,
