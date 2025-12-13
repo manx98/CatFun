@@ -55,7 +55,7 @@ class _IndexHomeViewState extends State<IndexHomeView>
     double minCardWidth = 188;
     double spacing = kHomeMovieCardSpacing;
     int count = ((screenWidth + spacing) / (minCardWidth + spacing)).floor();
-    count = count.clamp(1, 6);
+    count = count.clamp(2, 6);
     return count;
   }
 

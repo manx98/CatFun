@@ -130,10 +130,10 @@ class _MirrorTableViewState extends State<MirrorTableView>
 
   int get mirrorGridCount {
     double screenWidth = MediaQuery.of(context).size.width;
-    double minCardWidth = 160;
+    double minCardWidth = 200;
     double spacing = 12;
     int count = ((screenWidth + spacing) / (minCardWidth + spacing)).floor();
-    count = count.clamp(2, 6);
+    count = count.clamp(1, 6);
     return count;
   }
 

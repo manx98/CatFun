@@ -899,7 +899,7 @@ class TVUIState extends State<TVUI>
                     _buildLiveSourceButton((_, showMenu) {
                       return CupertinoButton(
                         sizeStyle: CupertinoButtonSize.small,
-                        color: Colors.black.withValues(alpha: .72),
+                        color: Colors.white.withValues(alpha: .72),
                         borderRadius: BorderRadius.circular(24),
                         onPressed: showMenu,
                         child: Row(
@@ -914,7 +914,7 @@ class TVUIState extends State<TVUI>
                     Zoom(
                       child: CupertinoButton(
                         sizeStyle: CupertinoButtonSize.small,
-                        color: Colors.black.withValues(alpha: .72),
+                        color: Colors.white.withValues(alpha: .72),
                         borderRadius: BorderRadius.circular(24),
                         child: Row(
                           spacing: 6,
@@ -931,7 +931,7 @@ class TVUIState extends State<TVUI>
                     Zoom(
                       child: CupertinoButton(
                         sizeStyle: CupertinoButtonSize.small,
-                        color: Colors.black.withValues(alpha: .72),
+                        color: Colors.white.withValues(alpha: .72),
                         borderRadius: BorderRadius.circular(24),
                         onPressed: () {
                           homeController.setBottomNavigationBar(
