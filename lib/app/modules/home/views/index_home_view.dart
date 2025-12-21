@@ -393,6 +393,7 @@ class _IndexHomeViewState extends State<IndexHomeView>
                                   ),
                                 ),
                                 footer: CustomFooter(
+                                  height: 120,
                                   builder:
                                       (BuildContext context, LoadStatus? mode) {
                                     Widget body;
@@ -522,7 +523,7 @@ class _IndexHomeViewState extends State<IndexHomeView>
                                           note: subItem.remark,
                                           onTap: () {
                                             EasyLoading.dismiss();
-                                          handleClickItem(subItem, controller);
+                                            handleClickItem(subItem, controller);
                                             boop.selection();
                                           },
                                         );
