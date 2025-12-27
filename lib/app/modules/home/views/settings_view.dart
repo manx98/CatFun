@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:catmovie/app/modules/home/views/auto_update.dart';
 import 'package:catmovie/app/widget/k_body.dart';
 import 'package:catmovie/app/widget/window_appbar.dart';
@@ -586,6 +587,13 @@ class _SettingsViewState extends State<SettingsView>
     );
   }
 
+  int get them_mode {
+    if (autoDarkMode) {
+      return 3;
+    }
+    return isDark? 2 : 1;
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -614,38 +622,68 @@ class _SettingsViewState extends State<SettingsView>
             SettingsSection(
               title: Text('常规设置'),
               tiles: <SettingsTile>[
-                if (!autoDarkMode)
-                  SettingsTile.switchTile(
-                    onToggle: (value) {
-                      isDark = value;
+                SettingsTile(
+                  leading: Icon(Icons.monitor),
+                  title: Text("主题"),
+                  trailing: AnimatedToggleSwitch<int>.size(
+                    height: 30,
+                    textDirection: TextDirection.ltr,
+                    current: them_mode,
+                    values: const [1, 2, 3],
+                    selectedIconScale: 1,
+                    iconOpacity: 1,
+                    spacing: 1,
+                    animationDuration: Duration(milliseconds: 250),
+                    separatorBuilder: (int index){
+                      var color = Colors.black12;
+                      if(them_mode == 2 ||
+                        them_mode == 1 && index == 0 ||
+                          them_mode == 3 && index == 1) {
+                        color = Colors.transparent;
+                      }
+                      return Container(width: 1, height: 15, color: color);
+                    },
+                    indicatorSize: const Size.fromWidth(70),
+                    iconBuilder: (int value) {
+                      var style = TextStyle(fontSize: 14, color: (context.isDarkMode ? Colors.white : Colors.black));
+                      switch (value) {
+                        case 1:
+                          return Text("亮", style: style);
+                        case 2:
+                          return Text("暗", style: style);
+                        default:
+                          return Text("系统", style: style);
+                      }
+                    },
+                    iconAnimationType: AnimationType.onHover,
+                    styleBuilder: (i){
+                      if(i == 2) {
+                        return ToggleStyle(indicatorColor: Colors.white24, backgroundColor: Colors.white.withValues(alpha: 0.08));
+                      } else {
+                        return ToggleStyle(indicatorColor: Colors.white, backgroundColor: (context.isDarkMode ? Colors.white12 : Colors.black12.withValues(alpha: 0.09)));
+                      }
+                    },
+                    style: ToggleStyle(
+                      borderColor: Colors.transparent,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    onChanged: (i) {
+                      switch(i) {
+                        case 1:
+                          autoDarkMode = false;
+                          isDark = false;
+                          break;
+                        case 2:
+                          autoDarkMode = false;
+                          isDark = true;
+                          break;
+                        default:
+                          autoDarkMode = true;
+                          isDark = false;
+                      }
                       boop.success();
                     },
-                    onPressed: (cx) {
-                      isDark = !isDark;
-                      boop.success();
-                    },
-                    initialValue: isDark,
-                    // leading: Icon(Icons.settings_brightness),
-                    leading: leadingIcon(r"""
-<svg t="1758654524737" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9044" width="200" height="200"><path d="M535.369874 104.082286l107.52 217.819428a54.857143 54.857143 0 0 0 41.398857 30.134857l240.566858 34.816a54.857143 54.857143 0 0 1 30.427428 93.842286l-173.933714 169.764572a54.857143 54.857143 0 0 0-15.872 48.566857l40.886857 238.884571a54.857143 54.857143 0 0 1-79.798857 57.856l-215.04-112.713143a54.857143 54.857143 0 0 0-51.2 0l-215.04 113.005715a54.857143 54.857143 0 0 1-79.798857-58.514286l41.179428-239.469714a54.857143 54.857143 0 0 0-15.945143-48.566858L16.787017 480.256A54.857143 54.857143 0 0 1 46.921874 386.413714l240.274286-34.816a54.857143 54.857143 0 0 0 41.398857-30.134857l107.812572-217.819428a54.857143 54.857143 0 0 1 98.742857 0z" fill="#404053" p-id="9045"></path></svg>
-"""),
-                    title: Text('暗色主题'),
-                  ),
-                SettingsTile.switchTile(
-                  onToggle: (value) {
-                    autoDarkMode = value;
-                    boop.success();
-                  },
-                  onPressed: (cx) {
-                    autoDarkMode = !autoDarkMode;
-                    boop.success();
-                  },
-                  initialValue: autoDarkMode,
-                  // leading: Icon(CupertinoIcons.moon_stars_fill),
-                  leading: leadingIcon(r"""
-<svg t="1758654465566" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8017" width="200" height="200"><path d="M900.3008 597.2992a46.9504 46.9504 0 0 0-47.0016-46.8992H768a46.8992 46.8992 0 0 0-46.848 46.8992v256c0 25.9072 20.992 46.9504 46.848 46.9504h85.3504c25.9584 0 47.0016-20.992 47.0016-46.9504v-256z m-170.752-256V256a46.9504 46.9504 0 0 0-46.848-46.9504h-512A46.9504 46.9504 0 0 0 123.7504 256v298.6496a46.9504 46.9504 0 0 0 46.9504 46.9504H512a38.4 38.4 0 0 1 0 76.8h-46.8992v93.8496H512a38.4 38.4 0 0 1 0 76.8H298.6496a38.4 38.4 0 0 1 0-76.8h89.6V678.4h-217.6a123.8016 123.8016 0 0 1-123.6992-123.7504V256a123.7504 123.7504 0 0 1 123.7504-123.7504h512A123.8016 123.8016 0 0 1 806.2976 256v85.2992a38.4 38.4 0 0 1-76.8 0z m247.552 512a123.7504 123.7504 0 0 1-123.8016 123.7504H768a123.7504 123.7504 0 0 1-123.648-123.7504v-256a123.6992 123.6992 0 0 1 123.648-123.6992h85.3504a123.7504 123.7504 0 0 1 123.8016 123.6992v256z" p-id="8018"></path></svg>
-""", width: 25, height: 25),
-                  title: Text('跟随系统主题'),
+                  )
                 ),
                 if (false)
                   // ignore: dead_code

@@ -4,9 +4,9 @@ var hideCursor = HideCursor();
 
 class HideCursor {
   void hideCursor(){
-    print("=======未实现=======\n");
+    //TODO 未实现
   }
   void showCursor() {
-    print("=======未实现=======\n");
+    //TODO 未实现
   }
 }

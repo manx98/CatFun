@@ -5,6 +5,7 @@ import 'package:catmovie/app/extension.dart';
 import 'package:catmovie/app/modules/home/views/history.dart';
 import 'package:catmovie/app/modules/home/views/search.dart';
 import 'package:catmovie/app/widget/zoom.dart';
+import 'package:catmovie/shared/enum.dart';
 import 'package:catmovie/utils/boop.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -393,22 +394,49 @@ class _IndexHomeViewState extends State<IndexHomeView>
                                   ),
                                 ),
                                 footer: CustomFooter(
-                                  height: 120,
+                                  height: 160,
                                   builder:
                                       (BuildContext context, LoadStatus? mode) {
                                     Widget body;
+                                    Widget icon;
+                                    var textStyle = TextStyle(
+                                        color: (context.isDarkMode ? Colors.white: Colors.black).withValues(alpha: 0.4),
+                                        fontSize: 14
+                                    );
+                                    double iconSize = 20;
                                     if (mode == LoadStatus.idle) {
-                                      body = const Text("上划加载更多");
+                                      icon = Icon(Icons.arrow_circle_up, color: textStyle.color, size: iconSize);
+                                      body = Text("上划加载更多", style: textStyle);
                                     } else if (mode == LoadStatus.loading) {
-                                      body = const CupertinoActivityIndicator();
+                                      icon = CupertinoActivityIndicator();
+                                      body = Text("加载中...", style: TextStyle(color: Colors.white, fontSize: textStyle.fontSize));
                                     } else if (mode == LoadStatus.failed) {
-                                      body = const Text("加载失败, 请重试");
+                                      icon = Icon(Icons.arrow_circle_up, color: textStyle.color, size: iconSize);
+                                      body = Text("加载失败, 请重试", style: textStyle);
                                     } else if (mode == LoadStatus.canLoading) {
-                                      body = const Text("释放以加载更多");
+                                      icon = Icon(Icons.arrow_circle_down, color: Color.fromRGBO(52, 195, 255, 1), size: iconSize);
+                                      body = Text("释放以加载更多", style: TextStyle(
+                                        color: Color.fromRGBO(52, 195, 255, 1),
+                                      ));
                                     } else {
-                                      body = const Text("没有更多数据");
+                                      icon = Icon(Icons.sentiment_neutral, color: textStyle.color, size: iconSize);
+                                      body = Text("没有更多数据", style: textStyle);
                                     }
-                                    return Center(child: body);
+                                    return Center(child:  Container(
+                                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                                      margin: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                                      decoration: BoxDecoration(
+                                        color: (context.isDarkMode ? Colors.white : Colors.black).withValues(alpha: 0.05),
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          icon,
+                                          SizedBox(width: 8),
+                                          body,
+                                        ],
+                                      )));
                                   },
                                 ),
                                 enablePullDown: indexEnablePullDown,
