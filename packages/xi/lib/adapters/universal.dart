@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:dart_qjson/dart_qjson.dart';
 import 'package:xi/xi.dart';
@@ -238,7 +239,7 @@ class UniversalSpider extends ISpiderAdapter {
       "iframe": iframe,
     });
     if (code.isEmpty) return [];
-    var result = await js2.evalSync(code, timeout: kEvalTimeout);
+    var result = await js2.evalSync(code);
     // 返回的貌似是 '"xx.m3u8"'
     // 所以可能还需要在解析一下
     String realResult = jsonDecode(result);

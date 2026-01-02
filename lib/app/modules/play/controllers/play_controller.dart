@@ -258,12 +258,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-  Future<String> parseIframe(String iframe) async {
+  Future<String> parseIframe(VideoDetail? context, String iframe) async {
     var closed = showLoading("正在解析iframe");
     List<String> result = [];
     var error = "";
     try {
-      result = await home.currentMirrorItem.parseIframe(iframe);
+      if(context != null) {
+        SourceMeta? source = context.getContext();
+        if(source != null) {
+          for(int i=0; i < home.mirrorList.length; i++) {
+            var mirror = home.mirrorList[i];
+            if(source.id == mirror.meta.id) {
+              debugPrint("${mirror.meta.id} [${mirror.meta.name}]: $iframe");
+              result = await mirror.parseIframe(iframe);
+              break;
+            }
+          }
+        }
+      }
+      if(result.isEmpty) {
+        EasyLoading.showError("未知播放源, 无法播放");
+        return "";
+      }
     } catch (e) {
       error = e.toString();
       debugPrint("parseIframe error: $e");
@@ -271,7 +287,7 @@ document.addEventListener('DOMContentLoaded', function() {
       closed();
     }
     if (error.isNotEmpty) {
-      EasyLoading.showError(error);
+      EasyLoading.showError("解析失败：$error");
       return "";
     }
     if (result.isEmpty || result[0].isEmpty) {
@@ -368,14 +384,14 @@ document.addEventListener('DOMContentLoaded', function() {
           return false;
         }
         if (curr.type == VideoType.iframe) {
-          url = await parseIframe(url);
+          url = await parseIframe(context, url);
           if (url.isEmpty) return false;
         }
         url.openToIINA();
         break;
       case VideoKernel.mediaKit:
         if (curr.type == VideoType.iframe) {
-          url = await parseIframe(url);
+          url = await parseIframe(context, url);
           if (url.isEmpty) return false;
         }
         if (mediaKitPlayer == null) return false;
